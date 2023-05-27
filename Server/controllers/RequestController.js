@@ -1,15 +1,14 @@
 const request = require('../models/Request')
 
 const addRequest = async(req, res) => {
-    const {passengerPicture, passengerUsername, requestCategory, distance} = req.body;
+    const {passengerUsername, destination, passengerPicture, distance} = req.body;
     try
     {
-
          await request.create({
-            passengerPicture,
             passengerUsername,
-            requestCategory,
-            distance
+            destination,
+            passengerPicture,
+            distance,
         })
         res.send({status:"ok"});
     }catch(error){

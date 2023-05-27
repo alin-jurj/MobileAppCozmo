@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import RegisterScreen from './RegisterScreen';
 import jwt_decode from "jwt-decode";
-//import {LoginContext} from '../App'
+import {LoginContext} from '../App'
 import { useContext } from 'react';
 import { BackgroundContext } from '../App';
 
@@ -12,7 +12,7 @@ import { BackgroundContext } from '../App';
 
 function LoginScreen ({navigation}) {
 
-    // const logincontext = useContext(LoginContext); 
+     const logincontext = useContext(LoginContext); 
      const backGroundContext = useContext(BackgroundContext);
 
      const [username, setusername]  = useState('')
@@ -35,10 +35,10 @@ function LoginScreen ({navigation}) {
         const j = jwt_decode(data)
         const role = j.role
         
-        //logincontext.setloginDetails(j);
+        logincontext.setloginDetails(j);
         if(role == "Passanger")
         {
-           navigation.navigate('Proba')
+           navigation.navigate('ClientScreen')
         }
         if(role == "Driver")
         {
