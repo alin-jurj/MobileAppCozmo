@@ -131,14 +131,14 @@ function RegisterScreen  ({navigation}) {
           }
         </View>
 
-        <View style={{flexDirection: 'row', marginTop: 30, width: 150, justifyContent: 'space-evenly'}}>
+        {/* <View style={{flexDirection: 'row', marginTop: 30, width: 150, justifyContent: 'space-evenly'}}>
           <View style={{backgroundColor: role == 'Passenger' ? '#0782F9' : 'white', width: 50, height: 50, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
             <Icon name="street-view" color={role == 'Passenger' ? 'white' : '#0782F9'} size={30} onPress={() => setRole('Passenger')}></Icon>
           </View>
           <View style={{backgroundColor: role == 'Driver' ? '#0782F9' : 'white', width: 50, height: 50, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
             <Icon name="car" color={role == 'Driver' ? 'white' : '#0782F9'} size={25} onPress={() => setRole('Driver')}></Icon>
           </View>
-        </View>
+        </View> */}
 
         <View style = {styles.buttonContainer}>
           <TouchableOpacity

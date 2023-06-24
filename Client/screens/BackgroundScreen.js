@@ -25,7 +25,7 @@ const BackgroundScreen = () => {
     ]
 
     const BackGroundContainer = ({item}) => (
-        <View style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+        <View style={{marginLeft: 20, marginRight: 20, marginTop: 110}}>
             <Image source={{uri: item.url}} style={{width: 150, height: 200, borderTopLeftRadius: 20, borderTopRightRadius: 20}}></Image>
             <TouchableOpacity style={styles.button} onPress={() => backgroundContext.setBackground(item.url)}>
                 <Text style={{color: 'white', fontSize: 12}}>Choose</Text>

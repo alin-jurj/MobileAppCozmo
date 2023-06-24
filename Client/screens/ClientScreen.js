@@ -3,22 +3,14 @@ import { Text, View, ImageBackground, StyleSheet, TextInput, FlatList, Image, To
 import {LoginContext} from '../App'
 import { useContext } from 'react';
 import { BackgroundContext } from '../App';
-// import { LoginContext } from '../App';
-
 
 
 
 function ClientScreen({navigation}) {
   const context = useContext(LoginContext);
-  const [text, changeText] = useState('');
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  //const contextcoordonate= useContext(ContextCoordinate);
-  //const logincontext = useContext(LoginContext)
-  const [datta, setdatta] = useState('')
-//   const [location, setlocation] = useState('')
+
   const backGroundContext = useContext(BackgroundContext);
- // const chosenVehicleContext = useContext(ChosenVehicleContext);
-  const date = new Date();
+
 
   const backgrounds = [
     {
@@ -36,59 +28,8 @@ function ClientScreen({navigation}) {
     }
 ]
 
-  useEffect(() => {
-
-//   //console.log(logincontext.loginDetails)
-//    // getLocation();
-//     console.log(location);
-//     fetch("http://10.0.2.2:8000/car/")
-//     .then(res => res.json())
-//     .then(data => {
-//      //console.log(data)
-//       setdatta(data)
-//     }).catch(error => console.log(error))
-
-   
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true); 
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setKeyboardVisible(false); 
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
-  
-//   const Driver = ({ item }) => (
-    
-//     <Pressable style={styles.driver} onLongPress={() => {
-//       console.log("Pressed view!");
-//       chosenVehicleContext.setChosenVehicle(item)
-//       navigation.navigate('MapPreview');
-//     }}>
-//       {/* {console.log(item?.pictureUrl)} */}
-//       <Image source={{uri: item?.pictureUrl}} style={{height: 80, width: 130, borderRadius: 10}} resizeMode='stretch'></Image>
-//       <View style={styles.driverDetails}>destination
-        
-//         <Text style={styles.description}>Arrival: {date.getHours()}:{date.getMinutes()+20}</Text>
-//         <Text style={styles.description}>Category: {item?.category}</Text>
-//         <Text style={styles.description}>Price: {item?.price} RON/KM</Text>
-//       </View>
-//       <TouchableOpacity style={styles.button} onPress={() => {chosenVehicleContext.setChosenVehicle(item);navigation.navigate('Map')}}><Text style={{color: 'white', fontSize: 12}}>Choose</Text></TouchableOpacity>
-//     </Pressable>
-//   );
-
 const passengerUsername = context.loginDetails.username;
+
 const handleRequest = function(id) {
   let destination = '';
   
@@ -99,7 +40,7 @@ const handleRequest = function(id) {
   } else if (id === 3) {
     destination = 'Police';
   }
-
+ 
   fetch('http://10.0.2.2:8000/request/add', {
     method: 'POST',
     headers: {
@@ -110,19 +51,19 @@ const handleRequest = function(id) {
       destination,
     }),
   });
+  navigation.navigate('RobotCamera')
 };
 const BackGroundContainer = ({item}) => (
-  <View style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+  <View style={{marginLeft: 30, marginRight: 20, marginTop: 110}}>
       <Image source={{uri: item.url}} style={{width: 150, height: 200, borderTopLeftRadius: 20, borderTopRightRadius: 20}}></Image>
       <TouchableOpacity style={styles.button} onPress={() => handleRequest(item.id)} >
-          <Text style={{color: 'white', fontSize: 12}}>Choose</Text>
+          <Text style={{color: 'white', fontSize: 12}}>Choose destination</Text>
       </TouchableOpacity>
   </View>
 )
   return (
     <View style={styles.container}>
         <ImageBackground source={{uri: backGroundContext.background}} resizeMode="stretch" style={styles.image}>
-        <Text style = {styles.text}> Alege destinatia dorita </Text>
         <FlatList 
                 data={backgrounds}
                 renderItem={({item}) => <BackGroundContainer item={item} />}
@@ -135,64 +76,28 @@ const BackGroundContainer = ({item}) => (
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center'
-    },
-    image: {
-      paddingTop: 150,
-      width: 480,
-      height: 820,
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingBottom: 100
-    },
-    input: {
-        width: 300,
-        height: 50,
-        borderWidth: 1,
-        borderColor: '#0D0B84',
-        backgroundColor: '#BBC7F2',
-        borderRadius: 20,
-        padding: 15,
-        color: 'black',
-    },
-    listContainer: {
-      height: 210,
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    driver: {
-      width: 375,
-      height: 100,
-      backgroundColor: '#7F89E1',
-      borderWidth: 1,
-      borderColor: '#0D0B84',
-      flexDirection: 'row',
-      padding: 9,
-      marginVertical: 2,
-      borderRadius: 15,
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    description: {
-      color: 'white',
-    },
-    button: {
+  container: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    width:410,
+    height:820,
+    paddingTop: 50,
+    paddingLeft: 5
+  },
+  button: {
       alignItems: 'center',
       justifyContent: 'center',
       paddingVertical: 8,
       paddingHorizontal: 18,
-      borderRadius: 20,
+      borderBottomRightRadius: 20,
+      borderBottomLeftRadius: 20,
       backgroundColor: '#01135d',
-      marginRight: 10
-    },
-
-    text:{
-      alignItems:'center',
-      fontSize:35,
-      color:'black'
-    },
+      width: 150
+  },
 
   });
 
